@@ -10,16 +10,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth/register")
 public class UserController {
 
     private final UserEntityService userEntityService;
     private final UserDtoConverter userDtoConverter;
 
-    @PostMapping("/auth/register-admin")
+    @PostMapping("/admin")
     public ResponseEntity<GetUserDto> nuevoAdmin(@RequestBody CreateUserDto newUser) {
         UserEntity saveAdmin = userEntityService.saveAdmin(newUser);
 
@@ -29,7 +31,7 @@ public class UserController {
             return ResponseEntity.ok(userDtoConverter.convertUserEntityToGetUserDto(saveAdmin));
     }
 
-    @PostMapping("/auth/register-propietario")
+    @PostMapping("/propietario")
     public ResponseEntity<GetUserDto> nuevoPropietario(@RequestBody CreateUserDto newUser) {
         UserEntity savedProp = userEntityService.savePropietario(newUser);
 
@@ -39,7 +41,7 @@ public class UserController {
             return ResponseEntity.ok(userDtoConverter.convertUserEntityToGetUserDto(savedProp));
     }
 
-    @PostMapping("/auth/register-gestor")
+    @PostMapping("/gestor")
     public ResponseEntity<GetUserDto> nuevoUsuario(@RequestBody CreateUserDto newUser) {
 
         UserEntity saveGestor = userEntityService.saveGestor(newUser);

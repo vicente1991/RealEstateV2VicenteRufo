@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.RealEstate.security;
 
-import com.salesianostriana.dam.RealEstate.security.dto.JwtAdminResponse;
+import com.salesianostriana.dam.RealEstate.security.dto.JwtUserResponse;
 import com.salesianostriana.dam.RealEstate.security.dto.LoginDto;
 import com.salesianostriana.dam.RealEstate.security.jwt.JwtProvider;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
@@ -37,8 +37,7 @@ public class AuthenticationController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Devolver una respuesta adecuada
-        // que incluya el token del usuario.
+
         String jwt = jwtProvider.generateToken(authentication);
 
 
@@ -55,8 +54,8 @@ public class AuthenticationController {
     }
 
 
-    private JwtAdminResponse convertUserToJwtUserResponse(UserEntity user, String jwt) {
-        return JwtAdminResponse.builder()
+    private JwtUserResponse convertUserToJwtUserResponse(UserEntity user, String jwt) {
+        return JwtUserResponse.builder()
                 .nombre(user.getNombre())
                 .email(user.getEmail())
                 .avatar(user.getAvatar())

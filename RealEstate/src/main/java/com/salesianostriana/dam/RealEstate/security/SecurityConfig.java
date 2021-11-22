@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/inmobiliaria/**").hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/auth/**").anonymous()
+                    .antMatchers(HttpMethod.POST, "/auth-register/**").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.POST, "/h2-console/**").anonymous()
                     .anyRequest().permitAll();
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

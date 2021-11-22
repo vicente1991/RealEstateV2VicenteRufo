@@ -28,10 +28,12 @@ public class UserEntityService extends BaseService<UserEntity, Long, UserEntityR
     public UserEntity saveAdmin(CreateUserDto newUser) {
         if (newUser.getPassword().contentEquals(newUser.getPassword2())) {
             UserEntity userEntity = UserEntity.builder()
-                    .password(passwordEncoder.encode(newUser.getPassword()))
-                    .avatar(newUser.getAvatar())
-                    .nombre(newUser.getFullname())
+                    .nombre(newUser.getNombre())
+                    .apellidos(newUser.getApellidos())
                     .email(newUser.getEmail())
+                    .direccion(newUser.getDireccion())
+                    .avatar(newUser.getAvatar())
+                    .password(passwordEncoder.encode(newUser.getPassword()))
                     .rol(UserRole.ADMIN)
                     .build();
             return save(userEntity);
@@ -43,10 +45,12 @@ public class UserEntityService extends BaseService<UserEntity, Long, UserEntityR
     public UserEntity savePropietario(CreateUserDto newUser) {
         if (newUser.getPassword().contentEquals(newUser.getPassword2())) {
             UserEntity userEntity = UserEntity.builder()
-                    .password(passwordEncoder.encode(newUser.getPassword()))
-                    .avatar(newUser.getAvatar())
-                    .nombre(newUser.getFullname())
+                    .nombre(newUser.getNombre())
+                    .apellidos(newUser.getApellidos())
                     .email(newUser.getEmail())
+                    .direccion(newUser.getDireccion())
+                    .avatar(newUser.getAvatar())
+                    .password(passwordEncoder.encode(newUser.getPassword()))
                     .rol(UserRole.PROPIETARIO)
                     .build();
             return save(userEntity);
@@ -57,10 +61,12 @@ public class UserEntityService extends BaseService<UserEntity, Long, UserEntityR
     public UserEntity saveGestor(CreateUserDto newUser) {
         if (newUser.getPassword().contentEquals(newUser.getPassword2())) {
             UserEntity userEntity = UserEntity.builder()
-                    .password(passwordEncoder.encode(newUser.getPassword()))
-                    .avatar(newUser.getAvatar())
-                    .nombre(newUser.getFullname())
+                    .nombre(newUser.getNombre())
+                    .apellidos(newUser.getApellidos())
                     .email(newUser.getEmail())
+                    .direccion(newUser.getDireccion())
+                    .avatar(newUser.getAvatar())
+                    .password(passwordEncoder.encode(newUser.getPassword()))
                     .rol(UserRole.GESTOR)
                     .build();
             return save(userEntity);

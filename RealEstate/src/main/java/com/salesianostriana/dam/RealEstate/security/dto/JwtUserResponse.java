@@ -8,9 +8,9 @@ import lombok.*;
 public class JwtUserResponse {
 
     private String email;
-    private String fullName;
+    private String nombre;
     private String avatar;
-    private String role;
+    private String rol;
     private String token;
 
 }
