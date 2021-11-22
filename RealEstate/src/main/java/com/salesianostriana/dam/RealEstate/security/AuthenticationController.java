@@ -60,6 +60,7 @@ public class AuthenticationController {
                 .email(user.getEmail())
                 .avatar(user.getAvatar())
                 .rol(user.getRol().name())
+                .token(jwt)
                 .build();
     }
 

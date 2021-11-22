@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationEntryPoint authenticationEntryPoint;
-    private final JwtAuthorizationFilter filter;
+    private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final JwtAccessDeniedHandler accessDeniedHandler;
 
 
@@ -50,11 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/auth-register/**").hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/h2-console/**").anonymous()
+                    .antMatchers(HttpMethod.POST, "/auth/register/**").anonymous()
+                    .antMatchers("/h2-console/**").anonymous()
                     .anyRequest().permitAll();
 
-        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.headers().frameOptions().disable();
 
     }
 

@@ -5,17 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name="users")
@@ -29,7 +29,18 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @NaturalId
     @Column(unique = true, updatable = false)
