@@ -330,7 +330,6 @@ public class ViviendaController {
         if(viviendaService.findById(id).isEmpty()){
             return ResponseEntity.notFound().build();
         }
-
         else {
             viviendaService.deleteById(id);
 
@@ -367,12 +366,6 @@ public class ViviendaController {
             return ResponseEntity.noContent().build();
         }
 
-
     }
-
-
-
-
-    
 
 }

@@ -34,7 +34,7 @@ public class UserEntityService extends BaseService<UserEntity, UUID, UserEntityR
     }
 
     public UserEntity loadUserById(UUID uuid) throws UsernameNotFoundException{
-        return this.repository.findId(uuid)
+        return this.repository.findById(uuid)
                 .orElseThrow(()-> new UsernameNotFoundException(uuid + " no encontrado"));
     }
 
