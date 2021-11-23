@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.salesianostriana.dam.RealEstate.services.base.BaseService;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service("userDetailsService")
@@ -27,6 +29,14 @@ public class UserEntityService extends BaseService<UserEntity, UUID, UserEntityR
                 .orElseThrow(()-> new UsernameNotFoundException(email + " no encontrado"));
     }
 
+    public List<UserEntity> loadUserByRole(UserRole rols) throws UsernameNotFoundException{
+        return this.repository.findByRol(rols);
+    }
+
+    public UserEntity loadUserById(UUID uuid) throws UsernameNotFoundException{
+        return this.repository.findId(uuid)
+                .orElseThrow(()-> new UsernameNotFoundException(uuid + " no encontrado"));
+    }
 
     public UserEntity saveAdmin(CreateUserDto newUser) {
         if (newUser.getPassword().contentEquals(newUser.getPassword2())) {

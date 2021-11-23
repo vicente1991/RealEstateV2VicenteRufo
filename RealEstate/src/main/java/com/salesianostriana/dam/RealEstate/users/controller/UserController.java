@@ -8,6 +8,7 @@ import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import com.salesianostriana.dam.RealEstate.users.services.UserEntityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,33 +25,33 @@ public class UserController {
 
     @PostMapping("/admin")
     public ResponseEntity<GetUserDto> nuevoAdmin(@RequestBody CreateUserDto newUser) {
-        UserEntity saveAdmin = userEntityService.saveAdmin(newUser);
+        UserEntity admin = userEntityService.saveAdmin(newUser);
 
-        if (saveAdmin == null)
+        if (admin == null)
             return ResponseEntity.badRequest().build();
         else
-            return ResponseEntity.ok(userDtoConverter.convertUserEntityToGetUserDto(saveAdmin));
+            return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(admin));
     }
 
     @PostMapping("/propietario")
     public ResponseEntity<GetUserDto> nuevoPropietario(@RequestBody CreateUserDto newUser) {
-        UserEntity savedProp = userEntityService.savePropietario(newUser);
+        UserEntity prop = userEntityService.savePropietario(newUser);
 
-        if (savedProp == null)
+        if (prop == null)
             return ResponseEntity.badRequest().build();
         else
-            return ResponseEntity.ok(userDtoConverter.convertUserEntityToGetUserDto(savedProp));
+            return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(prop));
     }
 
     @PostMapping("/gestor")
     public ResponseEntity<GetUserDto> nuevoUsuario(@RequestBody CreateUserDto newUser) {
 
-        UserEntity saveGestor = userEntityService.saveGestor(newUser);
+        UserEntity gestor = userEntityService.saveGestor(newUser);
 
-        if (saveGestor == null)
+        if (gestor == null)
             return ResponseEntity.badRequest().build();
         else
-            return ResponseEntity.ok(userDtoConverter.convertUserEntityToGetUserDto(saveGestor));
+            return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(gestor));
     }
 
 

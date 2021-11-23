@@ -51,6 +51,8 @@ public class UserEntity implements UserDetails {
     private String direccion;
     private String avatar;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserRole rol;
 
     @CreatedDate
@@ -65,26 +67,26 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
