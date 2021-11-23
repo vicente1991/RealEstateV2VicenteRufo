@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.RealEstate.users.services;
 
-import com.salesianostriana.dam.RealEstate.services.base.BaseService;
+
 import com.salesianostriana.dam.RealEstate.users.dto.CreateUserDto;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import com.salesianostriana.dam.RealEstate.users.model.UserRole;
@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.salesianostriana.dam.RealEstate.services.base.BaseService;
 
 import java.util.UUID;
 

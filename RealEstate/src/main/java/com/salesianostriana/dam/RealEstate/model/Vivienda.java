@@ -1,8 +1,8 @@
 package com.salesianostriana.dam.RealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
-import org.springframework.lang.Nullable;
+
 
 import javax.persistence.*;
 import java.io.Serializable;

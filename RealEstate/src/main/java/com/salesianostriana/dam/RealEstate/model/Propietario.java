@@ -1,9 +1,8 @@
 package com.salesianostriana.dam.RealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
