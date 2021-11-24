@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 public class CreateViviendaDTO {
 
     private String titulo, descripcion, avatar;
-    private String ubicacion, zona;
+    private String provincia, poblacion, latlng;
     private int numHabitaciones, numBanios;
     private double metrosCuadrados, precio;
-    private String tipo;
+    private Tipo tipo;
 
     private boolean tienePiscina, tieneAscensor, tieneGaraje;
 

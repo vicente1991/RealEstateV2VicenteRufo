@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @NoArgsConstructor@AllArgsConstructor
@@ -17,7 +18,7 @@ public abstract class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
     private String nombre;
     private String apellidos;
     private String direccion;

@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter @Setter
@@ -26,7 +27,7 @@ public class Propietario extends Persona{
     private List<Vivienda> viviendas=new ArrayList<>();
 
 
-    public Propietario(Long id, String nombre, String apellidos, String direccion, String email, String telefono, String avatar) {
+    public Propietario(UUID id, String nombre, String apellidos, String direccion, String email, String telefono, String avatar) {
         super(id, nombre, apellidos, direccion, email, telefono, avatar);
     }
 

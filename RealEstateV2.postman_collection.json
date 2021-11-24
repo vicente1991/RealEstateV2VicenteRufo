@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "b03a0be3-2213-4215-9a25-a8f9a6196297",
+		"name": "RealEstateV2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "crear admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"bla\",\r\n    \"apellidos\": \"bla bla\",\r\n    \"email\": \"blabla@email\",\r\n    \"direccion\": \"calle bla\",\r\n    \"avatar\": \"ninguno\",\r\n    \"password\":\"bla2\",\r\n    \"password2\": \"bla2\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"blabla22@email\",\r\n    \"password\":\"bla2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear gestor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4YjU3MWYzOS1mYWUxLTQ4M2UtOTlhMy1iNzEyMDQ3MzJlY2MiLCJpYXQiOjE2Mzc2OTE5NzQsIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.VAw0IU_3LqZxkKjrJwXyOE0MtEUgNNCJt1LTg-OS7-g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"bla\",\r\n    \"apellidos\": \"bla bla\",\r\n    \"email\": \"blabla777@email\",\r\n    \"direccion\": \"calle bla\",\r\n    \"avatar\": \"ninguno\",\r\n    \"password\":\"bla2\",\r\n    \"password2\": \"bla2\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/gestor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"gestor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear propietario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwNGRmZTkxOS01ZTVlLTQ5MjQtOTdmMC04YmMwYmExNmExZGYiLCJpYXQiOjE2Mzc2OTg1NjcsIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.KZU8pa5bXxY0RdlrFN_zR4OWQyiUY0gN0NRZgDgd0N4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"bla\",\r\n    \"apellidos\": \"bla bla\",\r\n    \"email\": \"blabla222@email\",\r\n    \"direccion\": \"calle bla\",\r\n    \"avatar\": \"ninguno\",\r\n    \"password\":\"bla2\",\r\n    \"password2\": \"bla2\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/propietario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"propietario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Top Viviendas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMDY4YjQxYy05NWI2LTQ0NDMtOGRhMS01YjE1NzViNjgwZDciLCJpYXQiOjE2Mzc2OTY3NzksIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.Dh-D8JR1mQYrn887gv4hTZ6ldbhXpqBg7rSQULVAKpY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/vivienda/top?n=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vivienda",
+						"top"
+					],
+					"query": [
+						{
+							"key": "n",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

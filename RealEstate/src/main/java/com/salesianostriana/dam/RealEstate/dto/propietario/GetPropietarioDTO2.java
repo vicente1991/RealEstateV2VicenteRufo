@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @SuperBuilder
 @Getter
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GetPropietarioDTO2 {
 
-    private Long id;
+    private UUID id;
     private String nombre;
     private String apellidos;
     private String email;

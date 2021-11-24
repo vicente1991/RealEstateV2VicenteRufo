@@ -1,29 +1,22 @@
 package com.salesianostriana.dam.RealEstate.controller;
 
-import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetInmobiliariaDTO;
-import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetViviendaInmobiliariaDto;
-import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.InmobiliariaDtoConverter;
 import com.salesianostriana.dam.RealEstate.dto.interesa.GetInteresaDTO;
 import com.salesianostriana.dam.RealEstate.dto.interesa.GetInteresadoDTO;
 import com.salesianostriana.dam.RealEstate.dto.interesa.InteresaDTOConverter;
 import com.salesianostriana.dam.RealEstate.dto.interesa.InteresadoDTOConverter;
-import com.salesianostriana.dam.RealEstate.dto.vivienda.GetInmobiliariaViviendaDto;
-import com.salesianostriana.dam.RealEstate.dto.vivienda.GetViviendaDTO;
-import com.salesianostriana.dam.RealEstate.dto.vivienda.GetViviendaPropietarioDTO;
+import com.salesianostriana.dam.RealEstate.dto.vivienda.*;
 import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstate.model.Interesa;
 import com.salesianostriana.dam.RealEstate.model.Interesado;
 import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import com.salesianostriana.dam.RealEstate.repository.InmobiliariaRepository;
 import com.salesianostriana.dam.RealEstate.repository.ViviendaRepository;
-import com.salesianostriana.dam.RealEstate.services.InmobiliariaService;
-import com.salesianostriana.dam.RealEstate.dto.vivienda.GetViviendaSummarizedDTO;
-import com.salesianostriana.dam.RealEstate.dto.vivienda.ViviendaDTOConverter;
-import com.salesianostriana.dam.RealEstate.model.*;
 import com.salesianostriana.dam.RealEstate.services.InteresaService;
 import com.salesianostriana.dam.RealEstate.services.InteresadoService;
 import com.salesianostriana.dam.RealEstate.services.PropietarioService;
 import com.salesianostriana.dam.RealEstate.services.ViviendaService;
+import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
+import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,6 +29,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,7 +56,7 @@ public class ViviendaController {
     private final InmobiliariaRepository inmobiliariaRepository;
     private final InteresaDTOConverter interesaDTOConverter;
     private final PropietarioService propietarioService;
-    private final ViviendaDTOConverter dtoConverter;
+    private final UserDtoConverter userDtoConverter;
 
 
     @Operation(summary = "Se listan todas las viviendas")
@@ -104,34 +98,17 @@ public class ViviendaController {
                     content = @Content),
     })
     @PostMapping("/")
-    public ResponseEntity<GetViviendaPropietarioDTO> createVivienda (@RequestBody GetViviendaPropietarioDTO dto){
+    public ResponseEntity<GetViviendaDTO> createVivienda (@RequestBody CreateViviendaDTO dto, @AuthenticationPrincipal UserEntity user){
 
-        Vivienda vivienda = viviendaDTOConverter.getViviendaPropietario(dto);
-        Propietario propietario = viviendaDTOConverter.getPropietarioVivienda(dto);
+        GetViviendaDTO getViviendaDTO = saveGetViviendaDto(dto,user);
 
+        Vivienda v = viviendaService.saveVivienda(getViviendaDTO,user);
 
-        if(dto.getTitulo().isEmpty()){
-            return ResponseEntity.badRequest().build();
-        }
-
-        else{
-
-            if(propietario.getId()!=null)
-                propietario = propietarioService.findById(propietario.getId()).get();
-
-            propietarioService.save(propietario);
-            vivienda.addPropietario(propietario);
-            viviendaService.save(vivienda);
-
-            GetViviendaPropietarioDTO nuevo = viviendaDTOConverter.createViviendaPropietarioDTO(vivienda);
-
-            return  ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(nuevo);
-
-        }
-
-
+        v.addPropietario(user);
+        viviendaService.saveVivienda(getViviendaDTO,user);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(getViviendaDTO);
     }
 
     @Operation(summary = "Crea un nuevo interesado e interesa asociado a una vivienda")
@@ -366,6 +343,32 @@ public class ViviendaController {
             return ResponseEntity.noContent().build();
         }
 
+
+
+    }
+
+    public GetViviendaDTO saveGetViviendaDto(CreateViviendaDTO createViviendaDto, UserEntity user){
+        GetViviendaDTO getViviendaDto = GetViviendaDTO.builder()
+                .titulo(createViviendaDto.getTitulo())
+                .descripcion(createViviendaDto.getDescripcion())
+                .latlng(createViviendaDto.getLatlng())
+                .tienePiscina(createViviendaDto.isTienePiscina())
+                .tieneAscensor(createViviendaDto.isTieneAscensor())
+                .tieneGaraje(createViviendaDto.isTieneGaraje())
+                .precio(createViviendaDto.getPrecio())
+                .poblacion(createViviendaDto.getPoblacion())
+                .provincia(createViviendaDto.getProvincia())
+                .avatar(createViviendaDto.getAvatar())
+                .tipo(createViviendaDto.getTipo())
+                .poblacion(createViviendaDto.getPoblacion())
+                .provincia(createViviendaDto.getProvincia())
+                .numHabitaciones(createViviendaDto.getNumHabitaciones())
+                .metrosCuadrados(createViviendaDto.getMetrosCuadrados())
+                .numBanios(createViviendaDto.getNumBanios())
+                .getUserDto(userDtoConverter.convertUserEntityToGetUserDto(user))
+                .build();
+
+        return getViviendaDto;
     }
 
 }

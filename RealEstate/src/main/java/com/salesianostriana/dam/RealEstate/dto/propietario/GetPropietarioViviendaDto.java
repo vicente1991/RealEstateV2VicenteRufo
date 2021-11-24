@@ -7,12 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
 public class GetPropietarioViviendaDto {
 
-    private Long id;
+    private UUID id;
     private String nombre;
     private String apellidos;
     private String direccion;

@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.RealEstate.users.model;
 
 
+import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +11,14 @@ import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,7 +32,7 @@ public class UserEntity implements UserDetails {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator",
@@ -58,11 +62,14 @@ public class UserEntity implements UserDetails {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "propietario")
+    private List<Vivienda> viviendas= new ArrayList<>();
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+
+       return List.of((new SimpleGrantedAuthority("ROL" + rol.name())));
     }
 
     @Override
