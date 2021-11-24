@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.RealEstate.users.model;
 
 
+import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -49,6 +52,7 @@ public class UserEntity implements UserDetails {
     private String nombre;
     private String apellidos;
     private String direccion;
+    private String telefono;
     private String avatar;
     private String password;
 
@@ -59,6 +63,20 @@ public class UserEntity implements UserDetails {
     private LocalDateTime createdAt;
 
 
+    @ManyToOne
+    @JoinColumn(name = "inmobiliaria_id", foreignKey = @ForeignKey(name = "PK_USER_INMOBILIARIA"), nullable = true)
+    private Inmobiliaria inmobiliaria;
+
+
+    public void addInmobiliaria(Inmobiliaria i) {
+        this.inmobiliaria = i;
+        i.getUserEntity().add(this);
+    }
+
+    public void removeInmobiliaria(Inmobiliaria i) {
+        i.getUserEntity().remove(this);
+        this.inmobiliaria = null;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
