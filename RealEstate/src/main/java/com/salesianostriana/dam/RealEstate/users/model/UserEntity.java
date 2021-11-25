@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.RealEstate.users.model;
 
 
+
+import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +13,7 @@ import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
@@ -31,7 +34,7 @@ public class UserEntity implements UserDetails {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator",
@@ -62,6 +65,8 @@ public class UserEntity implements UserDetails {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "propietario")
+    private List<Vivienda> viviendas= new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "inmobiliaria_id", foreignKey = @ForeignKey(name = "PK_USER_INMOBILIARIA"), nullable = true)
@@ -80,7 +85,8 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+
+       return List.of((new SimpleGrantedAuthority("ROL" + rol.name())));
     }
 
     @Override

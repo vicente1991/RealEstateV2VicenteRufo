@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.RealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import lombok.*;
 
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -19,8 +21,8 @@ import java.util.List;
 public class Vivienda implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Al hacerlo en auto, peta
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID id;
 
     private String titulo, descripcion, avatar, latlng;
     private String direccion, poblacion, provincia;
@@ -56,7 +58,7 @@ public class Vivienda implements Serializable {
     @ManyToOne
     @JoinColumn(name = "propietario_id", foreignKey = @ForeignKey(name = "FK_VIVIENDA_PROPIETARIO"))
     @JsonIgnore
-    private Propietario propietario;
+    private UserEntity propietario;
 
     @Builder.Default
     @OneToMany(mappedBy = "vivienda")
@@ -70,7 +72,7 @@ public class Vivienda implements Serializable {
     public Vivienda(String titulo, String descripcion, double precio) {
     }
 
-    public Vivienda(String titulo, String avatar, String tipo, double precio, String ubicacion, double metrosCuadrados, int numBanios, int numHabitaciones, boolean tieneAscensor, boolean tieneGaraje, boolean tienePiscina, String propietario, String inmobiliaria) {
+    public Vivienda(String titulo, String avatar, Tipo tipo, double precio, String ubicacion, double metrosCuadrados, int numBanios, int numHabitaciones, boolean tieneAscensor, boolean tieneGaraje, boolean tienePiscina, String propietario, String inmobiliaria) {
     }
 
     public Vivienda(String titulo, String descripcion, String avatar, double precio, int interesas) {
@@ -79,14 +81,14 @@ public class Vivienda implements Serializable {
 
     ///// HELPERS /////
 
-    public void addPropietario(Propietario p) {
+    public void addPropietario(UserEntity p) {
         this.propietario = p;
         if (p.getViviendas() == null)
             p.setViviendas(new ArrayList<>());
         p.getViviendas().add(this);
     }
 
-    public void removePropietario(Propietario p) {
+    public void removePropietario(UserEntity p) {
         p.getViviendas().remove(this);
         this.propietario = null;
     }

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class GetViviendaPropietarioDTO {
 
 
-    private Long id;
+    private UUID id;
     private String titulo, descripcion, avatar;
     private String direccion, codigoPostal, provincia, poblacion, latlng;
     private int numHabitaciones, numBanios;

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,7 @@ import java.util.List;
 @SuperBuilder
 public class GetInteresadoDTO {
 
-    private Long id;
+    private UUID id;
     private String nombre;
     private String apellidos;
     private String direccion;

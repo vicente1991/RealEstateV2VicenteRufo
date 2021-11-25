@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @NamedEntityGraph(
         name = Inmobiliaria.INMOBILIARIA_CON_VIVIENDA,
@@ -24,7 +25,7 @@ public class Inmobiliaria implements Serializable {
     public static final String INMOBILIARIA_CON_VIVIENDA= "grafo-inmobiliaria-con-vivienda";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String nombre;
     private String email;

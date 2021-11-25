@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.RealEstate.dto.propietario;
 
 import com.salesianostriana.dam.RealEstate.model.Propietario;
+import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 @Component
 public class PropietarioDTOConverter {
 
-    public GetPropietarioDTO2 PropietarioToGetPropietarioDTO2(Propietario p){
+    public GetPropietarioDTO2 PropietarioToGetPropietarioDTO2(UserEntity p){
         List<String> nombreVivienda = new ArrayList<>();
         for (int i=0; i<p.getViviendas().size();i++){
             nombreVivienda.add(p.getViviendas().get(i).getTitulo());
@@ -20,14 +21,13 @@ public class PropietarioDTOConverter {
                 .nombre(p.getNombre())
                 .apellidos(p.getApellidos())
                 .email(p.getEmail())
-                .telefono(p.getTelefono())
                 .avatar(p.getAvatar())
                 .viviendasNombre(nombreVivienda)
                 .build();
 
     }
 
-    public GetPropietarioDTO propietarioToGetPropietarioDTO(Propietario p) {
+    public GetPropietarioDTO propietarioToGetPropietarioDTO(UserEntity p) {
 
         List <String> lista = new ArrayList<>();
 
@@ -42,13 +42,12 @@ public class PropietarioDTOConverter {
                 .nombre(p.getNombre())
                 .apellidos(p.getApellidos())
                 .email(p.getEmail())
-                .telefono(p.getTelefono())
                 .avatar(p.getAvatar())
                 .viviendas(lista)
                 .build();
     }
 
-    public GetPropietarioViviendaDto propietarioToGetPropietarioViviendaDto(Propietario p){
+    public GetPropietarioViviendaDto propietarioToGetPropietarioViviendaDto(UserEntity p){
 
         List<String> direccion= new ArrayList<>();
 
@@ -62,7 +61,6 @@ public class PropietarioDTOConverter {
                 .apellidos(p.getApellidos())
                 .direccion(p.getDireccion())
                 .email(p.getEmail())
-                .telefono(p.getTelefono())
                 .direccionVivienda(direccion)
                 .build();
     }

@@ -13,6 +13,7 @@ import com.salesianostriana.dam.RealEstate.users.services.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -57,13 +58,16 @@ public class PropietarioController {
                             schema = @Schema(implementation = Propietario.class))})
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal UserEntity usuario) {
 
-        if (propietarioService.findById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
+        Optional<UserEntity> prop = propietarioService.findById(id);
+
+        if(!prop.isEmpty() && usuario.getId().equals(id)){
             propietarioService.deleteById(id);
             return ResponseEntity.noContent().build();
+        }
+        else {
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -78,7 +82,7 @@ public class PropietarioController {
                     description = "No se han encontrado los propietarios",
                     content = @Content),
     })
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<UserEntity>> findAll() {
         List<UserEntity> data = userEntityService.loadUserByRole(UserRole.PROPIETARIO);
 
@@ -101,17 +105,18 @@ public class PropietarioController {
                     description = "No se ha encontrado el propietario",
                     content = @Content),
     })
-    @GetMapping("{id}")
-    public ResponseEntity<UserEntity> findOne(@PathVariable UUID id, HttpServletRequest request) {
-        UserEntity prop = userEntityService.loadUserById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<List<GetPropietarioViviendaDto>> findOne(@PathVariable UUID id, @AuthenticationPrincipal UserEntity user) {
+        Optional<UserEntity> p= propietarioService.findById(id);
 
-        String token=  jwtAuthorizationFilter.getJwtFromRequest(request);
-        UUID propietarioId= jwtProvider.getUserIdFromJwt(token);
 
-        if (prop != null && id.equals(propietarioId) ){
+        if (user.getId().equals(id) ){
+            List<GetPropietarioViviendaDto> prop= p.stream()
+                    .map(propietarioDTOConverter::propietarioToGetPropietarioViviendaDto)
+                    .collect(Collectors.toList());
             return ResponseEntity.ok().body(prop);
         }else{
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return ResponseEntity.notFound().build();
         }
 
     }
