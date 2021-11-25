@@ -4,6 +4,8 @@ package com.salesianostriana.dam.RealEstate.controller;
 import com.salesianostriana.dam.RealEstate.dto.propietario.GetPropietarioViviendaDto;
 import com.salesianostriana.dam.RealEstate.security.jwt.JwtAuthorizationFilter;
 import com.salesianostriana.dam.RealEstate.security.jwt.JwtProvider;
+import com.salesianostriana.dam.RealEstate.users.dto.GetUserDto;
+import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import com.salesianostriana.dam.RealEstate.users.model.UserRole;
 import com.salesianostriana.dam.RealEstate.users.services.UserEntityService;
@@ -38,28 +40,8 @@ public class PropietarioController {
     private final UserEntityService userEntityService;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final JwtProvider jwtProvider;
+    private final UserDtoConverter userDtoConverter;
 
-
-    @Operation(summary = "Borra un Propietario creado")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204",
-                    description = "Se ha borrado el propietario",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserEntity.class))})
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal UserEntity usuario) {
-
-        Optional<UserEntity> prop = propietarioService.findById(id);
-
-        if(!prop.isEmpty() && usuario.getId().equals(id)){
-            propietarioService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 
 
     @Operation(summary = "Obtiene todos los propietarios creados")
@@ -73,13 +55,13 @@ public class PropietarioController {
                     content = @Content),
     })
     @GetMapping("/")
-    public ResponseEntity<List<UserEntity>> findAll() {
+    public ResponseEntity<List<GetUserDto>> findAll() {
         List<UserEntity> data = userEntityService.loadUserByRole(UserRole.PROPIETARIO);
 
         if (data.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
-            List<UserEntity> lista = data.stream().collect(Collectors.toList());
+            List<GetUserDto> lista = data.stream().map(userDtoConverter::convertUserEntityToGetUserDto).collect(Collectors.toList());
 
             return ResponseEntity.ok().body(lista);
         }
@@ -96,18 +78,43 @@ public class PropietarioController {
                     content = @Content),
     })
     @GetMapping("/{id}")
-    public ResponseEntity<List<GetPropietarioViviendaDto>> findOne(@PathVariable UUID id, @AuthenticationPrincipal UserEntity user) {
+    public ResponseEntity<GetUserDto> findOne(@PathVariable UUID id, @AuthenticationPrincipal UserEntity user) {
         Optional<UserEntity> p= propietarioService.findById(id);
 
 
-        if (user.getId().equals(id) ){
-            List<GetPropietarioViviendaDto> prop= p.stream()
-                    .map(propietarioDTOConverter::propietarioToGetPropietarioViviendaDto)
-                    .collect(Collectors.toList());
-            return ResponseEntity.ok().body(prop);
-        }else{
+        if (user.getId().equals(id) && p.isPresent() ){
             return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok().body(userDtoConverter.convertUserEntityToGetUserDto(p.get()));
         }
 
     }
+
+
+    @Operation(summary = "Borra un Propietario creado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se ha borrado el propietario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserEntity.class))})
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal UserEntity usuario) {
+
+        Optional<UserEntity> prop = propietarioService.findById(id);
+
+        if(!prop.isEmpty() && usuario.getId().equals(id)){
+
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            propietarioService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+
+
+
+
 }

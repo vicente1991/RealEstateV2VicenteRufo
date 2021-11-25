@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 public class GetViviendaSummarizedDTO {
 
-    private UUID id;
+    private Long id;
     private String titulo, descripcion, avatar;
     private double precio;
     private int interesas;

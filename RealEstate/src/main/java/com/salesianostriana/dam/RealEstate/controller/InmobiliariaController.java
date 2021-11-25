@@ -7,6 +7,11 @@ import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.InmobiliariaDtoConve
 import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstate.repository.InmobiliariaRepository;
 import com.salesianostriana.dam.RealEstate.services.InmobiliariaService;
+import com.salesianostriana.dam.RealEstate.users.dto.CreateUserDto;
+import com.salesianostriana.dam.RealEstate.users.dto.GetUserDto;
+import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
+import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
+import com.salesianostriana.dam.RealEstate.users.services.UserEntityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,10 +30,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/inmobiliaria")
-public class    InmobiliariaController {
+public class InmobiliariaController {
 
     private final InmobiliariaDtoConverter inmobiliariaDtoConverter;
     private final InmobiliariaService inmobiliariaService;
+    private final UserEntityService userEntityService;
+    private final UserDtoConverter userDtoConverter;
 
 
     @Operation(summary = "Crea una inmobiliaria")
@@ -124,6 +131,16 @@ public class    InmobiliariaController {
          }
     }
 
+    @PostMapping("/{id}/gestor")
+    public ResponseEntity<GetUserDto> nuevoUsuario(@RequestBody CreateUserDto newUser) {
+
+        UserEntity gestor = userEntityService.saveGestor(newUser);
+
+        if (gestor == null)
+            return ResponseEntity.badRequest().build();
+        else
+            return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(gestor));
+    }
 
 
 

@@ -40,12 +40,34 @@
 				},
 				{
 					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYzFlODAwMS03ZDU4LTFhMTItODE3ZC01OGZiODNjMzAwMDAiLCJpYXQiOjE2Mzc4NzU1OTQsIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.cgjhdel6bqDmk15ZC2unrT6GOdKX2sVjM9Ncr-8pHPM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"blabla22@email\",\r\n    \"password\":\"bla2\"\r\n}",
+							"raw": "{\r\n    \"email\": \"blabla@email\",\r\n    \"password\":\"bla2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,13 +91,24 @@
 				},
 				{
 					"name": "crear gestor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4YjU3MWYzOS1mYWUxLTQ4M2UtOTlhMy1iNzEyMDQ3MzJlY2MiLCJpYXQiOjE2Mzc2OTE5NzQsIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.VAw0IU_3LqZxkKjrJwXyOE0MtEUgNNCJt1LTg-OS7-g",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -115,7 +148,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwNGRmZTkxOS01ZTVlLTQ5MjQtOTdmMC04YmMwYmExNmExZGYiLCJpYXQiOjE2Mzc2OTg1NjcsIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.KZU8pa5bXxY0RdlrFN_zR4OWQyiUY0gN0NRZgDgd0N4",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -132,7 +165,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/auth/register/propietario",
+							"raw": "http://localhost:8080/auth/register/user",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -141,9 +174,134 @@
 							"path": [
 								"auth",
 								"register",
-								"propietario"
+								"user"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Propietario",
+			"item": [
+				{
+					"name": "Todos los propietarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/propietario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"propietario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Un propietario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/propietario/ac1e8001-7d59-1f4d-817d-595f79da0002",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"propietario",
+								"ac1e8001-7d59-1f4d-817d-595f79da0002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar propietario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/propietario/ac1e8001-7d59-1f4d-817d-595f79da0002",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"propietario",
+								"ac1e8001-7d59-1f4d-817d-595f79da0002"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vivienda",
+			"item": [
+				{
+					"name": "Crear Vivienda",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/propietario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"propietario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todas las viviendas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}
@@ -160,7 +318,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMDY4YjQxYy05NWI2LTQ0NDMtOGRhMS01YjE1NzViNjgwZDciLCJpYXQiOjE2Mzc2OTY3NzksIm5vbWJyZSI6ImJsYSIsInJvbGUiOiJBRE1JTiJ9.Dh-D8JR1mQYrn887gv4hTZ6ldbhXpqBg7rSQULVAKpY",
+							"value": "{{token}}",
 							"type": "string"
 						}
 					]
@@ -195,6 +353,35 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
 		}
 	]
 }

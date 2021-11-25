@@ -48,7 +48,7 @@ public class ViviendaDTOConverter {
                 v.isTieneAscensor(),
                 v.isTieneGaraje(),
                 v.isTienePiscina(),
-                v.getPropietario(),
+                v.getPropietario().getNombre(),
                 v.getInmobiliaria()
         );
     }
@@ -56,7 +56,6 @@ public class ViviendaDTOConverter {
     public GetViviendaDTO viviendaToGetViviendaDTO(Vivienda v) {
         return GetViviendaDTO
                 .builder()
-                .id(v.getId())
                 .titulo(v.getTitulo())
                 .descripcion(v.getDescripcion())
                 .precio(v.getPrecio())
@@ -70,8 +69,6 @@ public class ViviendaDTOConverter {
                 .tieneAscensor(v.isTieneAscensor())
                 .tieneGaraje(v.isTieneGaraje())
                 .tienePiscina(v.isTienePiscina())
-                .propietario(v.getPropietario()==null?null:v.getPropietario().getNombre())
-                .inmobiliaria(v.getInmobiliaria()==null?null:v.getInmobiliaria().getNombre())
                 .build();
     }
 
@@ -80,11 +77,9 @@ public class ViviendaDTOConverter {
 
 
         return GetViviendaInmobiliariaDto.builder()
-                .id(v.getId())
                 .titulo(v.getTitulo())
                 .descripcion(v.getDescripcion())
                 .precio(v.getPrecio())
-                .propietario(v.getPropietario().getNombre())
                 .tipo(v.getTipoVivienda())
                 .poblacion(v.getPoblacion())
                 .provincia(v.getProvincia())
@@ -115,16 +110,6 @@ public class ViviendaDTOConverter {
                 .build();
     }
 
-    public UserEntity getPropietarioVivienda (GetViviendaPropietarioDTO gv){
-        return UserEntity.builder()
-                .id(gv.getId())
-                .nombre(gv.getNombre())
-                .apellidos(gv.getApellidos())
-                .email(gv.getEmail())
-                .telefono(gv.getTelefono())
-                .avatar(gv.getAvatar2())
-                .build();
-    }
 
     public Vivienda getViviendaPropietario (GetViviendaPropietarioDTO gv){
         return Vivienda.builder()

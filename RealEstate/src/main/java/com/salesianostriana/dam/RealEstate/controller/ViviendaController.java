@@ -96,10 +96,8 @@ public class ViviendaController {
 
         GetViviendaDTO getViviendaDTO = saveGetViviendaDto(dto,user);
 
-        Vivienda v = viviendaService.saveVivienda(getViviendaDTO,user);
-
-        v.addPropietario(user);
         viviendaService.saveVivienda(getViviendaDTO,user);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(getViviendaDTO);
@@ -257,12 +255,12 @@ public class ViviendaController {
                 .provincia(createViviendaDto.getProvincia())
                 .avatar(createViviendaDto.getAvatar())
                 .tipo(createViviendaDto.getTipo())
-                .poblacion(createViviendaDto.getPoblacion())
                 .provincia(createViviendaDto.getProvincia())
+                .poblacion(createViviendaDto.getPoblacion())
                 .numHabitaciones(createViviendaDto.getNumHabitaciones())
                 .metrosCuadrados(createViviendaDto.getMetrosCuadrados())
                 .numBanios(createViviendaDto.getNumBanios())
-                .getUserDto(userDtoConverter.convertUserEntityToGetUserDto(user))
+                .propietario(userDtoConverter.convertUserEntityToGetUserDto(user))
                 .build();
 
         return getViviendaDto;

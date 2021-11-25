@@ -15,7 +15,7 @@ import java.util.UUID;
 public class GetViviendaPropietarioDTO {
 
 
-    private UUID id;
+    private Long id;
     private String titulo, descripcion, avatar;
     private String direccion, codigoPostal, provincia, poblacion, latlng;
     private int numHabitaciones, numBanios;
