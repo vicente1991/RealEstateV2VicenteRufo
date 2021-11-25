@@ -33,7 +33,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(admin));
     }
 
-    @PostMapping("/propietario")
+    @PostMapping("/user")
     public ResponseEntity<GetUserDto> nuevoPropietario(@RequestBody CreateUserDto newUser) {
         UserEntity prop = userEntityService.savePropietario(newUser);
 
