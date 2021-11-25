@@ -11,11 +11,10 @@
 * #### Vivienda :house:
 
 * #### Inmobiliaria :department_store:
-* #### Persona :frowning_man:
+* #### Usuario :frowning_man:
 
 * #### Propietario :man_with_turban:
 
-* #### Interesado :woman_office_worker:
 * #### Interesa :cupid:
 
 
@@ -55,19 +54,22 @@
 10. Eliminar el interés de un interesado por una vivienda.
 11. Obtener las viviendas por las que más gente se ha interesado.
 
+
 * ### **Las funcionalidades que tiene la entidad Inmobiliaria:**
 
 1. Añadir una nueva inmobiliaria
 2. Obtener todas inmobiliarias
 3. Obtener los datos de una inmobiliaria (debe obtener un listado sencillo de las viviendas gestionadas por la inmobiliaria).
 4. Eliminar una inmobiliaria (cuando se elimina, no se eliminan las viviendas gestionadas por esa inmobiliaria).
+5. 
 * ### **Las funcionalidades que tiene la entidad Interesado:**
 
 1. Obtener los datos de todos los interesados
 2. Obtener los datos de un interesado
 
-* ### **Las funcionalidades que tiene la entidad Propietario:**
 
-1. Obtener todos los propietarios
-2. Obtener los datos de un propietario (deben incluir también algunos datos de las viviendas que tiene en propiedad).
-3. Eliminar un propietario (se deben eliminar en cascada las viviendas de este propietario).
+* ### **Las funcionalidades que tiene la entidad Usuario:**
+1. Crear usuarios admin donde solo un usuario admin
+2. Crear usuarios como gestor donde solo los admin pueden crearlos
+3. Loguearte como cualquier tipo de usuario
+4. Crear usuarios donde cualquier tipo de usuario puede dar de alta a otro 
