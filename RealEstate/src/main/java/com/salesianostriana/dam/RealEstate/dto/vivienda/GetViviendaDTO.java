@@ -1,11 +1,8 @@
 package com.salesianostriana.dam.RealEstate.dto.vivienda;
 
-import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
-import com.salesianostriana.dam.RealEstate.model.Propietario;
 import com.salesianostriana.dam.RealEstate.model.Tipo;
 import com.salesianostriana.dam.RealEstate.users.dto.GetUserDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -31,6 +28,6 @@ public class GetViviendaDTO {
     private String inmobiliaria;
     private GetUserDto getUserDto;
 
-    public GetViviendaDTO(UUID id, String titulo, String descripcion, String avatar, String ubicacion, String provincia, int numHabitaciones, int numBanios, double metrosCuadrados, double precio, String tipo, boolean tienePiscina, boolean tieneAscensor, boolean tieneGaraje, String propietario, String inmobiliaria) {
+    public GetViviendaDTO(Long id, String titulo, String descripcion, String avatar, String ubicacion, String provincia, int numHabitaciones, int numBanios, double metrosCuadrados, double precio, String tipo, boolean tienePiscina, boolean tieneAscensor, boolean tieneGaraje, String propietario, String inmobiliaria) {
     }
 }

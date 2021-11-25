@@ -15,7 +15,7 @@ import java.util.UUID;
 @SuperBuilder
 public class GetInmobiliariaDTO {
 
-    private UUID id;
+    private Long id;
 
     private String nombre,telefono,email;
     private List<String> viviendas;

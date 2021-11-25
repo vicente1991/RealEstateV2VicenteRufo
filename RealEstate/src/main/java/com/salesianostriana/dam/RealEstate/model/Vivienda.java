@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 
-public class Vivienda implements Serializable {
+public class Vivienda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,18 +1,14 @@
 package com.salesianostriana.dam.RealEstate.controller;
 
 import com.salesianostriana.dam.RealEstate.dto.interesa.GetInteresaDTO;
-import com.salesianostriana.dam.RealEstate.dto.interesa.GetInteresadoDTO;
 import com.salesianostriana.dam.RealEstate.dto.interesa.InteresaDTOConverter;
-import com.salesianostriana.dam.RealEstate.dto.interesa.InteresadoDTOConverter;
 import com.salesianostriana.dam.RealEstate.dto.vivienda.*;
 import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstate.model.Interesa;
-import com.salesianostriana.dam.RealEstate.model.Interesado;
 import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import com.salesianostriana.dam.RealEstate.repository.InmobiliariaRepository;
 import com.salesianostriana.dam.RealEstate.repository.ViviendaRepository;
 import com.salesianostriana.dam.RealEstate.services.InteresaService;
-import com.salesianostriana.dam.RealEstate.services.InteresadoService;
 import com.salesianostriana.dam.RealEstate.services.PropietarioService;
 import com.salesianostriana.dam.RealEstate.services.ViviendaService;
 import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
@@ -49,9 +45,7 @@ public class ViviendaController {
 
     private final ViviendaService viviendaService;
     private final ViviendaDTOConverter viviendaDTOConverter;
-    private final InteresadoService interesadoService;
     private final InteresaService interesaService;
-    private final InteresadoDTOConverter interesadoDTOConverter;
     private final ViviendaRepository viviendaRepository;
     private final InmobiliariaRepository inmobiliariaRepository;
     private final InteresaDTOConverter interesaDTOConverter;
@@ -111,74 +105,8 @@ public class ViviendaController {
                 .body(getViviendaDTO);
     }
 
-    @Operation(summary = "Crea un nuevo interesado e interesa asociado a una vivienda")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201",
-                    description = "Se ha creado el interesado y el interesa asociado a una vivienda",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Vivienda.class))}),
-            @ApiResponse(responseCode = "400",
-                    description = "No se ha guardado el interesado y el interesa asociado a una vivienda",
-                    content = @Content),
-    })
-    @PostMapping("/{id}/meinteresa")
-    public ResponseEntity<Interesado> createInteresa (@RequestBody GetInteresadoDTO dto, @PathVariable Long id){
-
-        Interesado interesado = interesadoDTOConverter.a(dto);
-        Interesa interesa = interesadoDTOConverter.b(dto);
-
-        interesadoService.save(interesado);
-        interesa.addInteresado(interesado);
-        interesa.setVivienda(viviendaService.findById(id).get());
-
-        interesaService.save(interesa);
-        interesado.getInteresas().add(interesa);
-
-        return  ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(interesadoService.save(interesado));
 
 
-    }
-
-
-
-    @Operation(summary = "Crea un interesa asociado a una vivienda y a un interesado")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201",
-                    description = "Se ha creado el interesa asociado a una vivienda y a un interesado",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Vivienda.class))}),
-            @ApiResponse(responseCode = "400",
-                    description = "No se ha creado el interesa",
-                    content = @Content),
-    })
-    @PostMapping("/{id}/meinteresa/{id2}")
-    public ResponseEntity<Interesa> create (@PathVariable Long id2, @RequestBody GetInteresaDTO nuevoInteresa, @PathVariable Long id){
-
-
-        if(viviendaService.findById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }else {
-
-            Interesa interesa = interesaDTOConverter.create(nuevoInteresa);
-
-            Interesado interesado = interesadoService.getById(id2);
-
-            Vivienda vivienda = viviendaService.getById(id);
-
-            interesa.addVivienda(vivienda);
-            interesa.addInteresado(interesado);
-            Interesa result = interesaService.save(interesa);
-
-
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(result);
-
-        }
-
-    }
 
     @Operation(summary = "Obtiene una vivienda creada")
     @ApiResponses(value = {
@@ -224,37 +152,6 @@ public class ViviendaController {
 
 
     }
-
-    @Operation(summary = "Borra un interesa asociado a una vivienda y a un interesado")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204",
-                    description = "Se ha borrado el interesa asociado a una vivienda y a un interesado",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Vivienda.class))})
-    })
-
-    @DeleteMapping("/{id1}/meinteresa/{id2}")
-    public ResponseEntity<?> delete(@PathVariable Long id1, @PathVariable Long id2) {
-
-    if(viviendaService.findById(id1).isEmpty() && interesadoService.findById(id2).isEmpty()){
-        return ResponseEntity.notFound().build();
-    } else {
-
-        List<Interesa> interesaList = viviendaService.getById(id1).getInteresas();
-        Vivienda vivienda = viviendaService.getById(id1);
-        Interesado interesado = interesadoService.getById(id2);
-
-        for (Interesa i : interesaList){
-            interesaService.delete(i);
-
-            return ResponseEntity.noContent().build();
-        }
-    }
-    return ResponseEntity.badRequest().build();
-    }
-
-
-
 
 
 

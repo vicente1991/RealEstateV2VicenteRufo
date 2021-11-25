@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.RealEstate.dto.propietario;
 
-import com.salesianostriana.dam.RealEstate.model.Propietario;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import org.springframework.stereotype.Component;
 

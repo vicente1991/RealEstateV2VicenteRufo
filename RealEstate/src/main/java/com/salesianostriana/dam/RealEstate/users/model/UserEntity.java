@@ -73,20 +73,11 @@ public class UserEntity implements UserDetails {
     private Inmobiliaria inmobiliaria;
 
 
-    public void addInmobiliaria(Inmobiliaria i) {
-        this.inmobiliaria = i;
-        i.getUserEntity().add(this);
-    }
-
-    public void removeInmobiliaria(Inmobiliaria i) {
-        i.getUserEntity().remove(this);
-        this.inmobiliaria = null;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-       return List.of((new SimpleGrantedAuthority("ROL" + rol.name())));
+       return List.of((new SimpleGrantedAuthority("ROLE_" + rol.name())));
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class BaseService <T, UUID, R extends JpaRepository<T,UUID>> {
+public abstract class BaseService <T, Long, R extends JpaRepository<T,Long>> {
 
     @Autowired
     protected R repository;
@@ -20,11 +20,11 @@ public abstract class BaseService <T, UUID, R extends JpaRepository<T,UUID>> {
         return repository.findAll();
     }
 
-    public Optional<T> findById(UUID id) {
+    public Optional<T> findById(Long id) {
         return repository.findById(id);
     }
 
-    public T getById(UUID id) { return repository.getById(id); }
+    public T getById(Long id) { return repository.getById(id); }
 
     public T save(T t) {
         return repository.save(t);
@@ -42,7 +42,7 @@ public abstract class BaseService <T, UUID, R extends JpaRepository<T,UUID>> {
         return repository.findAll(pageable);
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
 

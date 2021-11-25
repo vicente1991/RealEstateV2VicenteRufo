@@ -1,10 +1,9 @@
 package com.salesianostriana.dam.RealEstate.dto.vivienda;
 
 import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetViviendaInmobiliariaDto;
-import com.salesianostriana.dam.RealEstate.dto.vivienda.*;
-import com.salesianostriana.dam.RealEstate.model.Propietario;
 import com.salesianostriana.dam.RealEstate.model.Tipo;
 import com.salesianostriana.dam.RealEstate.model.Vivienda;
+import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -116,8 +115,8 @@ public class ViviendaDTOConverter {
                 .build();
     }
 
-    public Propietario getPropietarioVivienda (GetViviendaPropietarioDTO gv){
-        return Propietario.builder()
+    public UserEntity getPropietarioVivienda (GetViviendaPropietarioDTO gv){
+        return UserEntity.builder()
                 .id(gv.getId())
                 .nombre(gv.getNombre())
                 .apellidos(gv.getApellidos())

@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 
 @NamedEntityGraph(
         name = Inmobiliaria.INMOBILIARIA_CON_VIVIENDA,
@@ -20,20 +20,17 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @SuperBuilder
-public class Inmobiliaria implements Serializable {
+public class Inmobiliaria {
 
     public static final String INMOBILIARIA_CON_VIVIENDA= "grafo-inmobiliaria-con-vivienda";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     private String nombre;
     private String email;
     private String telefono;
 
-    @ManyToOne
-    @JoinColumn(name = "user_entity")
-    private List<UserEntity> userEntity=new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "inmobiliaria", fetch = FetchType.EAGER)

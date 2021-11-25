@@ -3,7 +3,6 @@ package com.salesianostriana.dam.RealEstate.users.services;
 
 import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstate.services.InmobiliariaService;
-import com.salesianostriana.dam.RealEstate.users.dto.CreateGestorDto;
 import com.salesianostriana.dam.RealEstate.users.dto.CreateUserDto;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
 import com.salesianostriana.dam.RealEstate.users.model.UserRole;
@@ -89,8 +88,6 @@ public class UserEntityService extends BaseService<UserEntity, UUID, UserEntityR
                     .password(passwordEncoder.encode(newuser.getPassword()))
                     .inmobiliaria(null)
                     .build();
-            Optional<Inmobiliaria> inmobiliaria = inmobiliariaService.findById(newuser.getInmobiliaria().getId());
-            userEntity.addInmobiliaria(inmobiliaria.get());
             return save(userEntity);
         }else{
             return null;

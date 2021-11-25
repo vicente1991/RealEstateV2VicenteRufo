@@ -29,27 +29,12 @@ public class Interesa {
     @JoinColumn(name="vivienda_id", foreignKey = @ForeignKey(name = "FK_INTERESA_VIVIENDA"))
     private Vivienda vivienda;
 
-    @JsonIgnore
-    @ManyToOne
-    @MapsId("interesado_id")
-    @JoinColumn(name="interesado_id", foreignKey = @ForeignKey(name = "FK_INTERESA_INTERESADO"))
-    private Interesado interesado;
-
 
     @CreatedDate
     private LocalDateTime createdDate = LocalDateTime.now();
     private String mensaje;
 
 
-    public void addInteresado(Interesado i) {
-        this.interesado = i;
-        i.getInteresas().add(this);
-    }
-
-    public void removeInteresado(Interesado i) {
-        i.getInteresas().remove(this);
-        this.interesado = null;
-    }
 
     public void addVivienda(Vivienda v) {
         this.vivienda = v;

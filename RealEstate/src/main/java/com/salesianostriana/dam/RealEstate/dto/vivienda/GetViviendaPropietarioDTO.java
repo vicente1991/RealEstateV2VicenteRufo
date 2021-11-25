@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.RealEstate.dto.vivienda;
 
-import com.salesianostriana.dam.RealEstate.model.Propietario;
 import com.salesianostriana.dam.RealEstate.model.Tipo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
