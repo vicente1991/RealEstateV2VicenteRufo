@@ -666,6 +666,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Eliminar gestor asociado a inmobiliaria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/gestor/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								"gestor",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

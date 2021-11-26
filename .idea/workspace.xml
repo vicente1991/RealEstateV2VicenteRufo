@@ -7,10 +7,7 @@
     <list default="true" id="1bd8f836-8ce3-4462-8d82-eef9483ddb81" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Inmobiliaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Inmobiliaria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/resources/import.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

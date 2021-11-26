@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @CrossOrigin("http://localhost:4200")
@@ -167,17 +168,15 @@ public class InmobiliariaController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Inmobiliaria.class))})
     })
-    @DeleteMapping("/{id}/gestor")
+    @DeleteMapping("/gestor/{id}")
     @CrossOrigin
-    public ResponseEntity<?> deleteInmoGestor(@PathVariable Long id, @AuthenticationPrincipal UserEntity user){
+    public ResponseEntity<?> deleteInmoGestor(@PathVariable UUID id, @AuthenticationPrincipal UserEntity user){
 
-        if(viviendaService.findById(id).isPresent() && viviendaService.findById(id).get().getPropietario().getId().equals(user.getId()) || user.getRol().equals(UserRole.ADMIN)){
-            Vivienda v = viviendaService.findById(id).get();
-            Inmobiliaria i = new Inmobiliaria();
-            v.setInmobiliaria(i);
-            v.removeMuchasCosas();
-            v.removeInmobiliaria(i);
-            viviendaService.save(v);
+        if(userEntityService.findById(user.getId()).isPresent() && userEntityService.findById(user.getId()).equals(id) || user.getRol().equals(UserRole.ADMIN)){
+            UserEntity u= userEntityService.findById(id).get();
+            Inmobiliaria i = inmobiliariaService.findById(user.getInmobiliaria().getId()).get();
+            i.removeGestorInmo();
+            inmobiliariaService.save(i);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else{
             return ResponseEntity.notFound().build();

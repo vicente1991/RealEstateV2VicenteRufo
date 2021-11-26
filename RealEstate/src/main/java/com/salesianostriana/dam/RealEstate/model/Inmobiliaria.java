@@ -31,6 +31,10 @@ public class Inmobiliaria {
     private String email;
     private String telefono;
 
+    @ManyToOne
+    @JoinColumn(name = "user_entity_id")
+    private UserEntity user;
+
 
     @Builder.Default
     @OneToMany(mappedBy = "inmobiliaria", fetch = FetchType.EAGER)
@@ -41,8 +45,8 @@ public class Inmobiliaria {
     }
 
     @PreRemove
-    public void removeCosas(){
-        this.viviendas.forEach(result -> result.set(null));
+    public void removeGestorInmo(){
+        this.user.setInmobiliaria(null);
     }
 
 }
