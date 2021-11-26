@@ -70,7 +70,6 @@ public class UserEntity implements UserDetails {
     private List<Vivienda> viviendas= new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "inmobiliaria_id", foreignKey = @ForeignKey(name = "PK_USER_INMOBILIARIA"), nullable = true)
     private Inmobiliaria inmobiliaria;
 
 

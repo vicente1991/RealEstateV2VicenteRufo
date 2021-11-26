@@ -31,8 +31,7 @@ public class Inmobiliaria {
     private String email;
     private String telefono;
 
-    @ManyToOne
-    @JoinColumn(name = "user_entity_id")
+    @OneToMany(mappedBy = "inmobiliaria", fetch = FetchType.EAGER)
     private List<UserEntity> user=new ArrayList<>();
 
 
@@ -45,12 +44,12 @@ public class Inmobiliaria {
     }
 
     @PreRemove
-    public void removeGestorInmo(UserEntity user){
-        this.user.forEach(g ->{
-            if (g.getId()==user.getId()){
-                g.setInmobiliaria(null);
-            }
-        });
+    public void removeGestorInmo(){
+//        this.user.forEach(g ->{
+//            if (g.getId()==user.getId()){
+//                g.setInmobiliaria(null);
+//            }
+//        });
     }
 
 }

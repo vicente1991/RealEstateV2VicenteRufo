@@ -5,44 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bd8f836-8ce3-4462-8d82-eef9483ddb81" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/inmobiliaria/CreateInmobiliariaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/interesa/GetInteresaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/interesa/InteresaDTOConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/propietario/CreatePropietarioDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/propietario/GetPropietarioDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/propietario/GetPropietarioDTO2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/propietario/GetPropietarioViviendaDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/vivienda/CreateViviendaSummarizedDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/vivienda/GetViviendaDTO2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/InteresaPK.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Tipo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/repository/InmobiliariaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/repository/InteresaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/repository/ViviendaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/AuthenticationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/PasswordEncoderConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/dto/JwtUserResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/dto/LoginDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/jwt/JwtAccessDeniedHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/jwt/JwtAuthenticationEntryPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/jwt/JwtAuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/jwt/JwtProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/services/InmobiliariaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/services/InteresaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/services/ViviendaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/dto/CreateGestorDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/repos/UserEntityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_11_2021_8_51__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_11_2021_8_51__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/inmobiliaria/InmobiliariaDtoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/inmobiliaria/InmobiliariaDtoConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Inmobiliaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Inmobiliaria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
