@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1bd8f836-8ce3-4462-8d82-eef9483ddb81" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/inmobiliaria/GetViviendaInmobiliariaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/inmobiliaria/GetViviendaInmobiliariaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/vivienda/GetViviendaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/vivienda/GetViviendaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/vivienda/ViviendaDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/vivienda/ViviendaDTOConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Vivienda.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Vivienda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstateV2.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstateV2.postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/security/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
