@@ -197,14 +197,20 @@ public class ViviendaController {
                             schema = @Schema(implementation = Vivienda.class))})
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable Long id,@AuthenticationPrincipal UserEntity user){
 
-        if(viviendaService.findById(id).isEmpty()){
+        Optional<Vivienda> vivienda = viviendaService.findById(id);
+        if(vivienda.isPresent() && vivienda.get().getPropietario().getId().equals(user.getId())){
+            viviendaService.findById(id).get().removeMuchasCosas();
+            viviendaService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        if(vivienda.isEmpty() || !vivienda.get().getId().equals(id)){
             return ResponseEntity.notFound().build();
         }
         else {
             viviendaService.deleteById(id);
-
             return ResponseEntity.noContent().build();
         }
 

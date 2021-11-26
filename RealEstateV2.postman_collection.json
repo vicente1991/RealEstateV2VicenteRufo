@@ -230,14 +230,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/propietario/ac1e8001-7d59-1f4d-817d-595f79da0002",
+							"raw": "localhost:8080/propietario/ac1e8001-7d59-184e-817d-5978aa790002",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"propietario",
-								"ac1e8001-7d59-1f4d-817d-595f79da0002"
+								"ac1e8001-7d59-184e-817d-5978aa790002"
 							]
 						}
 					},
@@ -259,14 +259,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/propietario/ac1e8001-7d59-1f4d-817d-595f79da0002",
+							"raw": "localhost:8080/propietario/ac1e8001-7d59-184e-817d-5978aa790002",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"propietario",
-								"ac1e8001-7d59-1f4d-817d-595f79da0002"
+								"ac1e8001-7d59-184e-817d-5978aa790002"
 							]
 						}
 					},
@@ -280,16 +280,35 @@
 				{
 					"name": "Crear Vivienda",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Casa asac\",\r\n    \"descripcion\": \"Una descripcion muy diferente\",\r\n    \"avatar\": \"\",\r\n    \"latlang\": \"55.235241/ 125.75050\",\r\n    \"direccion\": \"Calle Condes De Bustillo\",\r\n    \"ciudad\": \"Sevilla\",\r\n    \"poblacion\":\"Sev\",\r\n    \"provincia\": \"Sevilla\",\r\n    \"tipo\": \"OBRA_NUEVA\",\r\n    \"precio\": 5000.0,\r\n    \"numHabitaciones\": 1,\r\n    \"metrosCuadrados\": 25,\r\n    \"numBanos\": 9,\r\n    \"tienePiscina\": true,\r\n    \"tieneAscensor\": true,\r\n    \"tieneGaraje\": true,\r\n    \"propietario\":{}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8080/propietario/",
+							"raw": "localhost:8080/vivienda/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"propietario",
+								"vivienda",
 								""
 							]
 						}
@@ -299,60 +318,250 @@
 				{
 					"name": "Todas las viviendas",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "localhost:8080/vivienda/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Una vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/26",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar una vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/26",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top Viviendas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/top/n?top=5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"top",
+								"n"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asociar Vivienda con Inmo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/26/inmobiliaria/26",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"26",
+								"inmobiliaria",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar vivienda con inmo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vivienda/26/inmobiliaria",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"26",
+								"inmobiliaria"
+							]
+						}
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Top Viviendas",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
+			"name": "Inmobiliaria",
+			"item": [
+				{
+					"name": "Crear una inmobiliaria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"InmoLuismi\",\r\n    \"email\":\"inmoLuismi@gmail.com\",\r\n    \"telefono\":\"657756657\",\r\n    \"avatar\":\"UwU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								""
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Todas las inmobiliarias",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/inmobiliaria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inmobiliaria",
+								""
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/vivienda/top?n=10",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"vivienda",
-						"top"
-					],
-					"query": [
-						{
-							"key": "n",
-							"value": "10"
-						}
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"auth": {

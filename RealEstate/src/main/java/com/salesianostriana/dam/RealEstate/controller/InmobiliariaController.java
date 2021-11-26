@@ -3,14 +3,19 @@ package com.salesianostriana.dam.RealEstate.controller;
 
 import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.CreateInmobiliariaDTO;
 import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetInmobiliariaDTO;
+import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetViviendaInmobiliariaDto;
 import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.InmobiliariaDtoConverter;
+import com.salesianostriana.dam.RealEstate.dto.vivienda.ViviendaDTOConverter;
 import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
+import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import com.salesianostriana.dam.RealEstate.repository.InmobiliariaRepository;
 import com.salesianostriana.dam.RealEstate.services.InmobiliariaService;
+import com.salesianostriana.dam.RealEstate.services.ViviendaService;
 import com.salesianostriana.dam.RealEstate.users.dto.CreateUserDto;
 import com.salesianostriana.dam.RealEstate.users.dto.GetUserDto;
 import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
+import com.salesianostriana.dam.RealEstate.users.model.UserRole;
 import com.salesianostriana.dam.RealEstate.users.services.UserEntityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,6 +25,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +42,8 @@ public class InmobiliariaController {
     private final InmobiliariaService inmobiliariaService;
     private final UserEntityService userEntityService;
     private final UserDtoConverter userDtoConverter;
+    private final ViviendaService viviendaService;
+    private final ViviendaDTOConverter viviendaDTOConverter;
 
 
     @Operation(summary = "Crea una inmobiliaria")
@@ -131,6 +139,25 @@ public class InmobiliariaController {
          }
     }
 
+    @PostMapping("/{id}/inmobiliaria/{id2}")
+    public ResponseEntity<?> asociarConInmo(@PathVariable Long id,@PathVariable Long id2,@AuthenticationPrincipal UserEntity user) {
+        if (viviendaService.findById(id).isEmpty() || inmobiliariaService.findById(id2).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            Vivienda v = viviendaService.findById(id).get();
+            Inmobiliaria i = inmobiliariaService.findById(id2).get();
+            v.setInmobiliaria(i);
+            v.addInmobiliaria(i);
+            viviendaService.save(v);
+            GetViviendaInmobiliariaDto get = viviendaDTOConverter.viviendaToGetViviendaInmobiliariaDto(v, i);
+            return ResponseEntity.status(HttpStatus.CREATED).body(get);
+
+
+        }
+
+    }
+
+
     @PostMapping("/{id}/gestor")
     public ResponseEntity<GetUserDto> nuevoUsuario(@RequestBody CreateUserDto newUser) {
 
@@ -142,6 +169,22 @@ public class InmobiliariaController {
             return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(gestor));
     }
 
+    @DeleteMapping("/{id}/inmobiliaria")
+    @CrossOrigin
+    public ResponseEntity<?> deleteInmoVivienda(@PathVariable Long id, @AuthenticationPrincipal UserEntity user){
 
-
+        if(viviendaService.findById(id).isPresent() && viviendaService.findById(id).get().getPropietario().getId().equals(user.getId()) || user.getRol().equals(UserRole.ADMIN)){
+            Vivienda v = viviendaService.findById(id).get();
+            Inmobiliaria i = new Inmobiliaria();
+            v.setInmobiliaria(i);
+            v.removeMuchasCosas();//preguntar a ale
+            viviendaService.save(v);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
+
+
+

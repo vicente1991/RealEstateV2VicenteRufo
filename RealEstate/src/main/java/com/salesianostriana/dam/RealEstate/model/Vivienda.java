@@ -95,12 +95,20 @@ public class Vivienda {
 
     public void addInmobiliaria(Inmobiliaria i) {
         this.inmobiliaria = i;
-        i.getViviendas().add(this);
+        if(i.getViviendas()==null){
+            i.setViviendas(new ArrayList<>());
+            i.getViviendas().add(this);
+        }
     }
 
     public void removeInmobiliaria(Inmobiliaria i) {
         i.getViviendas().remove(this);
         this.inmobiliaria = null;
+    }
+
+    @PreRemove
+    public void removeMuchasCosas(){
+        this.interesas.forEach(result -> result.setVivienda(null));
     }
 
 }

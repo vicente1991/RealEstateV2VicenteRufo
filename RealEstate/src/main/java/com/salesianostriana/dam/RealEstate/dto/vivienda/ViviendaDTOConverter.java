@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.RealEstate.dto.vivienda;
 
 import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetViviendaInmobiliariaDto;
+import com.salesianostriana.dam.RealEstate.model.Inmobiliaria;
 import com.salesianostriana.dam.RealEstate.model.Tipo;
 import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
@@ -132,6 +133,22 @@ public class ViviendaDTOConverter {
                 .build();
     }
 
+    public GetViviendaInmobiliariaDto viviendaToGetViviendaInmobiliariaDto(Vivienda v, Inmobiliaria i){
+
+        GetViviendaInmobiliariaDto g = new GetViviendaInmobiliariaDto();
+        g.setPoblacion(v.getPoblacion());
+        g.setProvincia(v.getProvincia());
+        g.setPrecio(v.getPrecio());
+        g.setAvatar(v.getAvatar());
+        g.setMetrosCuadrados(v.getMetrosCuadrados());
+        g.setNumHabitaciones(v.getNumHabitaciones());
+        g.setTipo(v.getTipoVivienda());
+        g.setTitulo(v.getTitulo());
+        g.setIdInmo(i.getId());
+        g.setNombreInmo(i.getNombre());
+
+        return g;
+    }
 
 
 }

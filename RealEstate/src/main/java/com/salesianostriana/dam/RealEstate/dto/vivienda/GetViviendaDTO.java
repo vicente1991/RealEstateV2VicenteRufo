@@ -15,6 +15,7 @@ import java.util.UUID;
 @SuperBuilder
 public class GetViviendaDTO {
 
+    private Long id;
     private String titulo, descripcion, avatar;
     private String poblacion, provincia, latlng;
     private int numHabitaciones, numBanios;
@@ -28,6 +29,6 @@ public class GetViviendaDTO {
 
 
 
-    public GetViviendaDTO( String titulo, String descripcion, String avatar, String ubicacion, String zona, int numHabitaciones, int numBanios, double metrosCuadrados, double precio, String tipo, boolean tienePiscina, boolean tieneAscensor, boolean tieneGaraje, String propietario, String inmobiliaria) {
+    public GetViviendaDTO(Long id, String titulo, String descripcion, String avatar, String ubicacion, String zona, int numHabitaciones, int numBanios, double metrosCuadrados, double precio, String tipo, boolean tienePiscina, boolean tieneAscensor, boolean tieneGaraje, String propietario, String inmobiliaria) {
     }
 }
