@@ -31,8 +31,8 @@ public class Inmobiliaria {
     private String email;
     private String telefono;
 
-    @OneToMany(mappedBy = "inmobiliaria", fetch = FetchType.EAGER)
-    private List<UserEntity> user=new ArrayList<>();
+    @OneToMany
+    private List<UserEntity> gestores=new ArrayList<>();
 
 
     @Builder.Default
@@ -43,13 +43,5 @@ public class Inmobiliaria {
     public Inmobiliaria(String nombre, String email, String telefono) {
     }
 
-    @PreRemove
-    public void removeGestorInmo(){
-//        this.user.forEach(g ->{
-//            if (g.getId()==user.getId()){
-//                g.setInmobiliaria(null);
-//            }
-//        });
-    }
 
 }

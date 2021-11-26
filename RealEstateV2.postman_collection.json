@@ -259,14 +259,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/propietario/ac1e8001-7d59-184e-817d-5978aa790002",
+							"raw": "localhost:8080/propietario/ac1b460d-7d5c-1ee5-817d-5c4f47410002",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"propietario",
-								"ac1e8001-7d59-184e-817d-5978aa790002"
+								"ac1b460d-7d5c-1ee5-817d-5c4f47410002"
 							]
 						}
 					},
@@ -493,6 +493,44 @@
 								"vivienda",
 								"27",
 								"inmobiliaria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar una vivienda",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Casa asac\",\r\n    \"descripcion\": \"Una descripcion muy comun\",\r\n    \"avatar\": \"\",\r\n    \"latlang\": \"55.235241/ 125.75050\",\r\n    \"direccion\": \"Calle Condes De Bustillo\",\r\n    \"ciudad\": \"NOsevilla\",\r\n    \"poblacion\":\"Sev\",\r\n    \"provincia\": \"Sevilla\",\r\n    \"tipo\": \"OBRA_NUEVA\",\r\n    \"precio\": 5.0,\r\n    \"numHabitaciones\": 1,\r\n    \"metrosCuadrados\": 25,\r\n    \"numBanos\": 1,\r\n    \"tienePiscina\": true,\r\n    \"tieneAscensor\": true,\r\n    \"tieneGaraje\": true,\r\n    \"propietario\":{}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/vivienda/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vivienda",
+								"2"
 							]
 						}
 					},

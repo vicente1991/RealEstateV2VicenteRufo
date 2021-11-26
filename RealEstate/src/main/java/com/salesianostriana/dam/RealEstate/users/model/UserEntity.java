@@ -104,4 +104,20 @@ public class UserEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    //HELPERS
+
+    public void addToInmo(Inmobiliaria i){
+    this.inmobiliaria=i;
+    i.getGestores().add(this);
+    }
+
+    public void removeFromInmo(Inmobiliaria i){
+        i.getGestores().remove(i);
+        this.inmobiliaria=null;
+    }
 }
+
+
+
+

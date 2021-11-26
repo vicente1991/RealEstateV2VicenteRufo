@@ -134,7 +134,7 @@ public class InmobiliariaController {
 
         if(inmobiliariaService.findById(id).isEmpty() ){
             return ResponseEntity.notFound().build();
-    }else {
+        }else {
         inmobiliariaService.deleteById(id);
             return ResponseEntity.noContent().build();
          }
@@ -168,17 +168,19 @@ public class InmobiliariaController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Inmobiliaria.class))})
     })
-    @DeleteMapping("/gestor/{id}")
-    @CrossOrigin
-    public ResponseEntity<?> deleteInmoGestor(@PathVariable UUID id, @AuthenticationPrincipal UserEntity user){
+    @DeleteMapping("gestor/{id}")
+    public ResponseEntity<GetUserDto> removeGestor (@PathVariable UUID id, @AuthenticationPrincipal UserEntity gestor){
 
-        if(userEntityService.findById(user.getId()).isPresent() && userEntityService.findById(user.getId()).equals(id) || user.getRol().equals(UserRole.ADMIN)){
-            UserEntity u= userEntityService.findById(id).get();
-            Inmobiliaria i = inmobiliariaService.findById(user.getInmobiliaria().getId()).get();
-            i.removeGestorInmo(user);
-            inmobiliariaService.save(i);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }else{
+        Optional<UserEntity> gestorEliminado = userEntityService.findById(id);
+
+
+        if (gestor.getRol().equals(UserRole.ADMIN) || gestorEliminado.get().getInmobiliaria().getId().equals(gestor.getInmobiliaria().getId())) {
+            userEntityService.deleteById(id);
+
+            return ResponseEntity.noContent().build();
+        }
+
+        else {
             return ResponseEntity.notFound().build();
         }
     }
