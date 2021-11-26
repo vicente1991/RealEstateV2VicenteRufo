@@ -175,7 +175,7 @@ public class InmobiliariaController {
         if(userEntityService.findById(user.getId()).isPresent() && userEntityService.findById(user.getId()).equals(id) || user.getRol().equals(UserRole.ADMIN)){
             UserEntity u= userEntityService.findById(id).get();
             Inmobiliaria i = inmobiliariaService.findById(user.getInmobiliaria().getId()).get();
-            i.removeGestorInmo();
+            i.removeGestorInmo(user);
             inmobiliariaService.save(i);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else{

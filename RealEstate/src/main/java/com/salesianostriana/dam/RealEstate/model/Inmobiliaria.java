@@ -33,7 +33,7 @@ public class Inmobiliaria {
 
     @ManyToOne
     @JoinColumn(name = "user_entity_id")
-    private UserEntity user;
+    private List<UserEntity> user=new ArrayList<>();
 
 
     @Builder.Default
@@ -45,8 +45,12 @@ public class Inmobiliaria {
     }
 
     @PreRemove
-    public void removeGestorInmo(){
-        this.user.setInmobiliaria(null);
+    public void removeGestorInmo(UserEntity user){
+        this.user.forEach(g ->{
+            if (g.getId()==user.getId()){
+                g.setInmobiliaria(null);
+            }
+        });
     }
 
 }

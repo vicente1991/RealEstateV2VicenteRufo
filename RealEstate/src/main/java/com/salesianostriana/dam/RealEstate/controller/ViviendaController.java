@@ -153,19 +153,30 @@ public class ViviendaController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Vivienda> edit (@RequestBody Vivienda v, @PathVariable Long id) {
+    public ResponseEntity<GetViviendaDTO> edit (@RequestBody GetViviendaDTO v,
+                                                @PathVariable Long id,
+                                                @AuthenticationPrincipal UserEntity prop) {
 
-        if(viviendaService.findById(id).isEmpty()){
+        Optional <Vivienda> viviendaEditada = viviendaService.findById(id);
+
+        if(viviendaEditada.isEmpty()){
             return ResponseEntity.notFound().build();
 
-        }else {
+        }
+
+        if (!viviendaEditada.get().getPropietario().getId().equals(prop.getId())) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .build();
+        }
+
+        else {
             return ResponseEntity.of(
 
                     viviendaService.findById(id).map(m -> {
                         m.setTitulo(v.getTitulo());
                         m.setDescripcion(v.getDescripcion());
                         m.setAvatar(v.getAvatar());
-                        m.setCodigoPostal(v.getCodigoPostal());
                         m.setLatlng(v.getLatlng());
                         m.setMetrosCuadrados(v.getMetrosCuadrados());
                         m.setNumBanios(v.getNumBanios());
@@ -173,16 +184,18 @@ public class ViviendaController {
                         m.setPoblacion(v.getPoblacion());
                         m.setPrecio(v.getPrecio());
                         m.setProvincia(v.getProvincia());
-                        m.setDireccion(v.getDireccion());
-                        m.setTipoVivienda(v.getTipoVivienda());
+                        m.setTipoVivienda(v.getTipo());
                         m.setTienePiscina(v.isTienePiscina());
                         m.setTieneAscensor(v.isTieneAscensor());
                         m.setTieneGaraje(v.isTieneGaraje());
                         viviendaService.save(m);
 
-                        return m;
+                        return viviendaDTOConverter.viviendaToGetViviendaDTO(m);
                     })
+
             );
+
+
         }
     }
 
