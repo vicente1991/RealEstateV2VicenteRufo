@@ -111,4 +111,6 @@ public class Vivienda {
         this.interesas.forEach(result -> result.setVivienda(null));
     }
 
+
+
 }

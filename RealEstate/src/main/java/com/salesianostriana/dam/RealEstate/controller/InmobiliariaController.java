@@ -139,23 +139,6 @@ public class InmobiliariaController {
          }
     }
 
-    @PostMapping("/{id}/inmobiliaria/{id2}")
-    public ResponseEntity<?> asociarConInmo(@PathVariable Long id,@PathVariable Long id2,@AuthenticationPrincipal UserEntity user) {
-        if (viviendaService.findById(id).isEmpty() || inmobiliariaService.findById(id2).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            Vivienda v = viviendaService.findById(id).get();
-            Inmobiliaria i = inmobiliariaService.findById(id2).get();
-            v.setInmobiliaria(i);
-            v.addInmobiliaria(i);
-            viviendaService.save(v);
-            GetViviendaInmobiliariaDto get = viviendaDTOConverter.viviendaToGetViviendaInmobiliariaDto(v, i);
-            return ResponseEntity.status(HttpStatus.CREATED).body(get);
-
-
-        }
-
-    }
 
 
     @PostMapping("/{id}/gestor")
@@ -169,21 +152,6 @@ public class InmobiliariaController {
             return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(gestor));
     }
 
-    @DeleteMapping("/{id}/inmobiliaria")
-    @CrossOrigin
-    public ResponseEntity<?> deleteInmoVivienda(@PathVariable Long id, @AuthenticationPrincipal UserEntity user){
-
-        if(viviendaService.findById(id).isPresent() && viviendaService.findById(id).get().getPropietario().getId().equals(user.getId()) || user.getRol().equals(UserRole.ADMIN)){
-            Vivienda v = viviendaService.findById(id).get();
-            Inmobiliaria i = new Inmobiliaria();
-            v.setInmobiliaria(i);
-            v.removeMuchasCosas();//preguntar a ale
-            viviendaService.save(v);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }else{
-            return ResponseEntity.notFound().build();
-        }
-    }
 }
 
 

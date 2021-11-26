@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.RealEstate.controller;
 
+import com.salesianostriana.dam.RealEstate.dto.inmobiliaria.GetViviendaInmobiliariaDto;
 import com.salesianostriana.dam.RealEstate.dto.interesa.GetInteresaDTO;
 import com.salesianostriana.dam.RealEstate.dto.interesa.InteresaDTOConverter;
 import com.salesianostriana.dam.RealEstate.dto.vivienda.*;
@@ -8,11 +9,13 @@ import com.salesianostriana.dam.RealEstate.model.Interesa;
 import com.salesianostriana.dam.RealEstate.model.Vivienda;
 import com.salesianostriana.dam.RealEstate.repository.InmobiliariaRepository;
 import com.salesianostriana.dam.RealEstate.repository.ViviendaRepository;
+import com.salesianostriana.dam.RealEstate.services.InmobiliariaService;
 import com.salesianostriana.dam.RealEstate.services.InteresaService;
 import com.salesianostriana.dam.RealEstate.services.PropietarioService;
 import com.salesianostriana.dam.RealEstate.services.ViviendaService;
 import com.salesianostriana.dam.RealEstate.users.dto.UserDtoConverter;
 import com.salesianostriana.dam.RealEstate.users.model.UserEntity;
+import com.salesianostriana.dam.RealEstate.users.model.UserRole;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,12 +48,8 @@ public class ViviendaController {
 
     private final ViviendaService viviendaService;
     private final ViviendaDTOConverter viviendaDTOConverter;
-    private final InteresaService interesaService;
-    private final ViviendaRepository viviendaRepository;
-    private final InmobiliariaRepository inmobiliariaRepository;
-    private final InteresaDTOConverter interesaDTOConverter;
-    private final PropietarioService propietarioService;
     private final UserDtoConverter userDtoConverter;
+    private final InmobiliariaService inmobiliariaService;
 
 
     @Operation(summary = "Se listan todas las viviendas")
@@ -217,36 +216,54 @@ public class ViviendaController {
 
     }
 
-    @Operation(summary = "Borra la asociación entre una vivienda y una inmobiliaria")
+
+
+
+    @Operation(summary = " Asocia una vivienda con una inmobiliaria")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204",
-                    description = "Se ha borrado la vivienda",
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha asociado la vivienda con una inmobiliaria",
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Vivienda.class))}),
             @ApiResponse(responseCode = "404",
-                    description = "No se ha encontrado la vivienda a la que le queremos quitar la inmobiliaria",
+                    description = "No se ha encontrado la vivienda a la que le queremos asociar la inmobiliaria",
                     content = @Content),
     })
-
-    @DeleteMapping("/{id}/inmobiliaria/")
-    public ResponseEntity deleteInmobiliariaFromVivienda(@PathVariable Long id) {
-
-        if(viviendaService.findById(id).isEmpty()){
+    @PostMapping("/{id}/inmobiliaria/{id2}")
+    public ResponseEntity<?> asociarConInmo(@PathVariable Long id,@PathVariable Long id2,@AuthenticationPrincipal UserEntity user) {
+        if (viviendaService.findById(id).isEmpty() || inmobiliariaService.findById(id2).isEmpty()) {
             return ResponseEntity.notFound().build();
+        } else {
+            Vivienda v = viviendaService.findById(id).get();
+            Inmobiliaria i = inmobiliariaService.findById(id2).get();
+            v.setInmobiliaria(i);
+            v.addInmobiliaria(i);
+            viviendaService.save(v);
+            GetViviendaInmobiliariaDto get = viviendaDTOConverter.viviendaToGetViviendaInmobiliariaDto(v, i);
+            return ResponseEntity.status(HttpStatus.CREATED).body(get);
+
+
         }
-
-        else {
-
-            Inmobiliaria inmobiliaria = viviendaService.findById(id).get().getInmobiliaria();
-            viviendaService.findById(id).get().removeInmobiliaria(inmobiliaria);
-            viviendaService.save(viviendaService.findById(id).get());
-
-            return ResponseEntity.noContent().build();
-        }
-
-
 
     }
+
+
+    @DeleteMapping("/{id}/inmobiliaria")
+    @CrossOrigin
+    public ResponseEntity<?> deleteInmoVivienda(@PathVariable Long id, @AuthenticationPrincipal UserEntity user){
+
+        if(viviendaService.findById(id).isPresent() && viviendaService.findById(id).get().getPropietario().getId().equals(user.getId()) || user.getRol().equals(UserRole.ADMIN)){
+            Vivienda v = viviendaService.findById(id).get();
+            Inmobiliaria i = new Inmobiliaria();
+            v.setInmobiliaria(i);
+            v.removeMuchasCosas();
+            viviendaService.save(v);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     public GetViviendaDTO saveGetViviendaDto(CreateViviendaDTO createViviendaDto, UserEntity user){
         GetViviendaDTO getViviendaDto = GetViviendaDTO.builder()
