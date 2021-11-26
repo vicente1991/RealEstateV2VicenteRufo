@@ -50,20 +50,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+                //Registros
                     .antMatchers(HttpMethod.POST, "/auth/register/admin").anonymous()/*necesitaria un admin ya creado*/
                     .antMatchers(HttpMethod.POST, "/auth/register/gestor").hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/auth/login/**").anonymous()
                     .antMatchers(HttpMethod.POST, "/auth/register/propietario").anonymous()
-                    .antMatchers(HttpMethod.GET,"/vivienda/top").authenticated()
+
+                //Propietarios
                     .antMatchers(HttpMethod.GET, "/propietario").authenticated()
                     .antMatchers(HttpMethod.GET, "/propietario/**").hasAnyRole("ADMIN","GESTOR")
                     .antMatchers(HttpMethod.DELETE, "/propietario").anonymous()
+
+                //Vivienda
                     .antMatchers(HttpMethod.POST, "/vivienda/**").hasAnyRole("ADMIN","PROPIETARIO")
                     .antMatchers(HttpMethod.GET, "/vivienda").authenticated()
                     .antMatchers(HttpMethod.GET, "/vivienda/**").authenticated()
                     .antMatchers(HttpMethod.DELETE, "/vivienda/**").hasAnyRole("ADMIN","PROPIETARIO")
                     .antMatchers(HttpMethod.POST, "/vivienda/**/inmobiliaria").authenticated()
                     .antMatchers(HttpMethod.DELETE, "/vivienda/**/inmobiliaria").authenticated()
+                    .antMatchers(HttpMethod.GET,"/vivienda/top").authenticated()
+
+                //Inmobiliaria
                     .antMatchers(HttpMethod.POST, "/inmobiliaria").hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/inmobiliaria").authenticated()
                     .antMatchers("/h2-console/**").permitAll()
