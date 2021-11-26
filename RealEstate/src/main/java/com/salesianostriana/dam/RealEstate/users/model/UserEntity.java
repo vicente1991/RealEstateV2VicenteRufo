@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name="users")
+@Table(name="USERS")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
@@ -60,6 +60,7 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "rol")
     private UserRole rol;
 
     @CreatedDate

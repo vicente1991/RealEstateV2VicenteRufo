@@ -141,8 +141,15 @@ public class InmobiliariaController {
 
 
 
+    @Operation(summary = "Añade una inmobiliaria con un gestor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se ha añadido un gestor a la inmobiliaria",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
     @PostMapping("/{id}/gestor")
-    public ResponseEntity<GetUserDto> nuevoUsuario(@RequestBody CreateUserDto newUser) {
+    public ResponseEntity<GetUserDto> nuevoGestorconInmo(@RequestBody CreateUserDto newUser) {
 
         UserEntity gestor = userEntityService.saveGestor(newUser);
 
@@ -150,6 +157,31 @@ public class InmobiliariaController {
             return ResponseEntity.badRequest().build();
         else
             return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(gestor));
+    }
+
+
+    @Operation(summary = "Borra una inmobiliaria con un gestor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se ha añadido un gestor a la inmobiliaria",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inmobiliaria.class))})
+    })
+    @DeleteMapping("/{id}/gestor")
+    @CrossOrigin
+    public ResponseEntity<?> deleteInmoGestor(@PathVariable Long id, @AuthenticationPrincipal UserEntity user){
+
+        if(viviendaService.findById(id).isPresent() && viviendaService.findById(id).get().getPropietario().getId().equals(user.getId()) || user.getRol().equals(UserRole.ADMIN)){
+            Vivienda v = viviendaService.findById(id).get();
+            Inmobiliaria i = new Inmobiliaria();
+            v.setInmobiliaria(i);
+            v.removeMuchasCosas();
+            v.removeInmobiliaria(i);
+            viviendaService.save(v);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

@@ -40,4 +40,9 @@ public class Inmobiliaria {
     public Inmobiliaria(String nombre, String email, String telefono) {
     }
 
+    @PreRemove
+    public void removeCosas(){
+        this.viviendas.forEach(result -> result.set(null));
+    }
+
 }

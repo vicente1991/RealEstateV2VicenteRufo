@@ -248,6 +248,16 @@ public class ViviendaController {
     }
 
 
+    @Operation(summary = " Borra una vivienda asociada con una inmobiliaria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se ha asociado la vivienda con una inmobiliaria",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Vivienda.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado la vivienda a la que le queremos asociar la inmobiliaria",
+                    content = @Content),
+    })
     @DeleteMapping("/{id}/inmobiliaria")
     @CrossOrigin
     public ResponseEntity<?> deleteInmoVivienda(@PathVariable Long id, @AuthenticationPrincipal UserEntity user){
@@ -257,6 +267,7 @@ public class ViviendaController {
             Inmobiliaria i = new Inmobiliaria();
             v.setInmobiliaria(i);
             v.removeMuchasCosas();
+            v.removeInmobiliaria(i);
             viviendaService.save(v);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else{
