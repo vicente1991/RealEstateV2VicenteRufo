@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bd8f836-8ce3-4462-8d82-eef9483ddb81" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_11_2021_8_51__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_11_2021_8_51__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/InmobiliariaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Inmobiliaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Inmobiliaria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RealEstateV2.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstateV2.postman_collection.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -150,14 +150,28 @@ public class InmobiliariaController {
                             schema = @Schema(implementation = Inmobiliaria.class))})
     })
     @PostMapping("/{id}/gestor")
-    public ResponseEntity<GetUserDto> nuevoGestorconInmo(@RequestBody CreateUserDto newUser) {
+    public ResponseEntity<GetUserDto> addGestor (@PathVariable Long id, @RequestBody CreateUserDto gestor,
+                                                    @AuthenticationPrincipal UserEntity usuario) {
 
-        UserEntity gestor = userEntityService.saveGestor(newUser);
+        Optional<Inmobiliaria> inmo = inmobiliariaService.findById(id);
 
-        if (gestor == null)
-            return ResponseEntity.badRequest().build();
-        else
-            return ResponseEntity.status(HttpStatus.CREATED).body(userDtoConverter.convertUserEntityToGetUserDto(gestor));
+
+        if(inmo.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        else if (usuario.getRol().equals(UserRole.ADMIN) || usuario.getInmobiliaria().getId().equals(id)){
+
+            UserEntity getUsuarioDTO = userEntityService.saveGestor(gestor);
+
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(userDtoConverter
+                            .convertUserEntityToGetUserDto(getUsuarioDTO));
+
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
     }
 
 
