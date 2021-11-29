@@ -17,6 +17,6 @@ public class InteresaPK implements Serializable {
 
     private Long vivienda_id;
 
-    private Long interesado_id;
+    private Long interesado_id; // TODO ¿Cómo puede seguir esto en Long si se ha cambiado el identificador del usuario a UUID?
 
 }

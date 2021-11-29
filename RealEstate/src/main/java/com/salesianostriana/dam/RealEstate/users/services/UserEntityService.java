@@ -41,6 +41,7 @@ public class UserEntityService extends BaseService<UserEntity, UUID, UserEntityR
                 .orElseThrow(()-> new UsernameNotFoundException(uuid + " no encontrado"));
     }
 
+    // TODO Los métodos que vienen a continuación son casi iguales. ¿No podrían refactorizarse en uno solo?
     public UserEntity saveAdmin(CreateUserDto newUser) {
         if (newUser.getPassword().contentEquals(newUser.getPassword2())) {
             UserEntity userEntity = UserEntity.builder()
