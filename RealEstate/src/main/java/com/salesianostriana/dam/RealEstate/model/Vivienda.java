@@ -61,7 +61,7 @@ public class Vivienda {
     private UserEntity propietario;
 
     @Builder.Default
-    @OneToMany(mappedBy = "vivienda")
+    @OneToMany(mappedBy = "vivienda", fetch = FetchType.EAGER)
     private List<Interesa> interesas = new ArrayList<>();
 
 

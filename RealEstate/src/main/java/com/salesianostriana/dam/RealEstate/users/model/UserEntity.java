@@ -66,7 +66,7 @@ public class UserEntity implements UserDetails {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "propietario")
+    @OneToMany(mappedBy = "propietario", fetch = FetchType.EAGER)
     private List<Vivienda> viviendas= new ArrayList<>();
 
     @ManyToOne

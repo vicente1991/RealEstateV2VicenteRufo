@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1bd8f836-8ce3-4462-8d82-eef9483ddb81" name="Changes" comment="" />
+    <list default="true" id="1bd8f836-8ce3-4462-8d82-eef9483ddb81" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/interesa/CreateInteresadoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/interesa/GetInteresadoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/dto/interesa/InteresadoDTOConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/controller/ViviendaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/InteresaPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/InteresaPK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Vivienda.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/model/Vivienda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/repository/ViviendaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/repository/ViviendaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/RealEstate/src/main/java/com/salesianostriana/dam/RealEstate/users/model/UserEntity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feat-hu01" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,6 +60,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn spring-boot:run" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="RealEstate [spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">

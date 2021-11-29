@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ViviendaRepository extends JpaRepository<Vivienda, Long> {
 
@@ -18,6 +19,10 @@ public interface ViviendaRepository extends JpaRepository<Vivienda, Long> {
             LIMIT 5)
             """, nativeQuery = true)
     List <Vivienda> top5ViviendasInteresas();
+
+//traertme viviendas por id de usuario
+
+    List<Vivienda> findViviendaById(UUID id);
 
 
 }

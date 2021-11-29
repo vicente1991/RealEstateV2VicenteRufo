@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Embeddable
 @Getter
@@ -17,6 +18,6 @@ public class InteresaPK implements Serializable {
 
     private Long vivienda_id;
 
-    private Long interesado_id;
+    private UUID interesado_id;
 
 }

@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -66,7 +67,6 @@ public class ViviendaController {
     public ResponseEntity<List<GetViviendaSummarizedDTO>> findAll(@PageableDefault(page=0, size=9) Pageable pageable){
 
         Page<Vivienda> datos = viviendaService.findAll(pageable);
-
         if(datos.isEmpty()){
             return ResponseEntity.notFound().build();
         }
@@ -74,7 +74,6 @@ public class ViviendaController {
             List<GetViviendaSummarizedDTO> lista = datos.stream()
                     .map(viviendaDTOConverter::viviendaToGetViviendaSummarizedDTO)
                     .collect(Collectors.toList());
-
             return ResponseEntity.ok().body(lista);
         }
     }
@@ -288,6 +287,22 @@ public class ViviendaController {
         }
     }
 
+    @GetMapping("/propietario")
+    public ResponseEntity<List<GetViviendaSummarizedDTO>> findPropietario(@AuthenticationPrincipal UserEntity user){
+
+        List<Vivienda> datos = user.getViviendas();
+        
+        if(user.getViviendas().isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            List<GetViviendaSummarizedDTO> lista = datos.stream()
+                    .map(viviendaDTOConverter::viviendaToGetViviendaSummarizedDTO)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok().body(lista);
+        }
+    }
+
 
     public GetViviendaDTO saveGetViviendaDto(CreateViviendaDTO createViviendaDto, UserEntity user){
         GetViviendaDTO getViviendaDto = GetViviendaDTO.builder()
@@ -312,5 +327,8 @@ public class ViviendaController {
 
         return getViviendaDto;
     }
+
+
+
 
 }
